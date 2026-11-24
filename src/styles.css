@@ -17,15 +17,15 @@
 body { min-height: 100vh; margin: 0; }
 button, input, select { font: inherit; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 3px solid rgba(98, 84, 231, .35);
+  outline: 3px solid rgba(16, 185, 129, .35);
   outline-offset: 3px;
 }
-::selection { color: #312578; background: #e8e6ff; }
+::selection { color: #065f46; background: #d1fae5; }
 
 .page-glow {
   background:
-    radial-gradient(ellipse at 9% 12%, rgba(116, 100, 235, .09), transparent 34%),
-    radial-gradient(ellipse at 94% 90%, rgba(51, 172, 154, .08), transparent 34%),
+    radial-gradient(ellipse at 9% 12%, rgba(16, 185, 129, .09), transparent 34%),
+    radial-gradient(ellipse at 94% 90%, rgba(52, 211, 153, .10), transparent 34%),
     #f6f7fb;
 }
 

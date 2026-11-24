@@ -7,7 +7,7 @@ const categories = [
   { value: "Otro", label: "Otro", icon: Sparkles },
 ];
 
-export default function Home({ connection, emit, notice, clearNotice }) {
+export default function Home({ connection, isDemo, emit, notice, clearNotice }) {
   const queryCode = new URLSearchParams(window.location.search).get("code") ?? "";
   const [nickname, setNickname] = useState("");
   const [category, setCategory] = useState("Comida");
@@ -153,7 +153,13 @@ export default function Home({ connection, emit, notice, clearNotice }) {
 
         <div className="mx-auto mt-5 flex min-h-7 max-w-4xl items-center justify-center gap-2 text-center text-xs text-muted">
           <span className={`h-2 w-2 rounded-full ${connection === "connected" ? "bg-emerald-500" : connection === "connecting" ? "animate-pulse bg-amber-400" : "bg-rose-500"}`} />
-          {connection === "connected" ? "Conectado en tiempo real" : connection === "connecting" ? "Conectando con el servidor…" : "Sin conexión con el servidor"}
+          {isDemo
+            ? "Modo demo: datos ficticios"
+            : connection === "connected"
+              ? "Conectado en tiempo real"
+              : connection === "connecting"
+                ? "Conectando con el servidor…"
+                : "Sin conexión con el servidor"}
         </div>
 
         {notice && (

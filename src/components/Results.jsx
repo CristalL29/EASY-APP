@@ -83,7 +83,7 @@ export default function Results({ room, currentUser, emit }) {
             <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">¡Ya tienen un plan!</h1>
           </div>
 
-          <div className="mt-7 rounded-2xl bg-gradient-to-br from-brand-700 to-violet-500 px-5 py-7 text-center text-white">
+          <div className="mt-7 rounded-2xl bg-gradient-to-br from-brand-700 to-emerald-400 px-5 py-7 text-center text-white">
             <p className="text-xs font-bold uppercase tracking-[.16em] text-white/75">Opción ganadora</p>
             <p className="mt-2 text-2xl font-black sm:text-3xl">{getOptionText(winner ?? {}) || "El grupo está decidiendo…"}</p>
           </div>

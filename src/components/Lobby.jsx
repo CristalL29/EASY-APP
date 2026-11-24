@@ -14,7 +14,7 @@ const modes = [
   { id: "consensus", title: "Consenso", description: "Voten y encuentren la opción favorita.", icon: "🤝" },
 ];
 
-export default function Lobby({ room, currentUser, emit, notice, clearNotice, setNotice }) {
+export default function Lobby({ room, currentUser, isDemo, emit, notice, clearNotice, setNotice }) {
   const [optionText, setOptionText] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
@@ -102,11 +102,11 @@ export default function Lobby({ room, currentUser, emit, notice, clearNotice, se
           <a href="/" className="text-lg font-black tracking-tight text-ink">decide<span className="text-brand-600">.</span></a>
           <div className="flex items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-semibold text-muted shadow-sm">
             <span className={`h-2 w-2 rounded-full ${room ? "bg-emerald-500" : "bg-slate-300"}`} />
-            Sala en vivo
+            {isDemo ? "Demo local · datos ficticios" : "Sala en vivo"}
           </div>
         </header>
 
-        <section className="rounded-3xl bg-gradient-to-br from-brand-700 via-brand-600 to-violet-500 p-6 text-white shadow-soft sm:p-9">
+        <section className="rounded-3xl bg-gradient-to-br from-brand-700 via-brand-600 to-emerald-400 p-6 text-white shadow-soft sm:p-9">
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-center">
             <div>
               <p className="text-sm font-semibold text-white/75">Comparte este código para invitar</p>

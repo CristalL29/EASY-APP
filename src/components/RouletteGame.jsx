@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, RotateCw, Trophy } from "lucide-react";
 import { getOptionId, getOptionText, getOptions, getRoomCode, isHost, sameId } from "../utils/room.js";
 
-const colors = ["#5143d2", "#e75b72", "#149c87", "#e99b32", "#3869c8", "#a24db8", "#2f9bce", "#c45b35"];
+const colors = ["#047857", "#10b981", "#34d399", "#059669", "#6ee7b7", "#065f46", "#a7f3d0", "#22c55e"];
 
 function pointAt(angle, radius, center = 200) {
   const radians = (angle * Math.PI) / 180;
@@ -43,13 +43,15 @@ export default function RouletteGame({ room, currentUser, emit, spinResult }) {
     const index = options.findIndex((option) => sameId(getOptionId(option), getOptionId(selected)));
     const segment = 360 / options.length;
     const centerAngle = -90 + (index + 0.5) * segment;
-    const currentAngle = ((centerAngle + rotation) % 360 + 360) % 360;
-    const adjustment = ((-90 - currentAngle) % 360 + 360) % 360;
     setWinner(null);
-    setRotation((current) => current + 360 * 6 + adjustment);
+    setRotation((current) => {
+      const currentAngle = ((centerAngle + current) % 360 + 360) % 360;
+      const adjustment = ((-90 - currentAngle) % 360 + 360) % 360;
+      return current + 360 * 6 + adjustment;
+    });
     const timer = window.setTimeout(() => setWinner(selected), 5300);
     return () => window.clearTimeout(timer);
-  }, [options, rotation, spinResult]);
+  }, [options, spinResult]);
 
   const wheelOptions = options.length > 0 ? options : [];
 
@@ -100,7 +102,7 @@ export default function RouletteGame({ room, currentUser, emit, spinResult }) {
                 );
               })}
               <circle cx="200" cy="200" r="28" fill="white" />
-              <circle cx="200" cy="200" r="9" fill="#5143d2" />
+              <circle cx="200" cy="200" r="9" fill="#047857" />
             </svg>
           </div>
 

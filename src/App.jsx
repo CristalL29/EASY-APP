@@ -6,16 +6,25 @@ import EliminationGame from "./components/EliminationGame.jsx";
 import ConsensusGame from "./components/ConsensusGame.jsx";
 import Results from "./components/Results.jsx";
 
+function DemoIndicator({ enabled }) {
+  if (!enabled) return null;
+  return (
+    <div className="pointer-events-none fixed bottom-4 right-4 z-50 rounded-full border border-emerald-200 bg-white/95 px-3 py-2 text-xs font-semibold text-emerald-800 shadow-sm">
+      Modo demo · datos ficticios
+    </div>
+  );
+}
+
 function normalized(value) {
   return String(value ?? "").toLowerCase().replace(/[\s_-]/g, "");
 }
 
 export default function App() {
   const state = useSocket();
-  const { room, currentUser, emit, connection, notice, clearNotice, spinResult } = state;
+  const { room, currentUser, emit, connection, isDemo, notice, clearNotice, spinResult } = state;
 
   if (!room) {
-    return <Home connection={connection} emit={emit} notice={notice} clearNotice={clearNotice} />;
+    return <Home connection={connection} isDemo={isDemo} emit={emit} notice={notice} clearNotice={clearNotice} />;
   }
 
   const status = normalized(room.status);
@@ -25,18 +34,18 @@ export default function App() {
     consensusStatus === "results" || Boolean(room.results || room.result);
 
   if (isResults) {
-    return <Results room={room} currentUser={currentUser} emit={emit} />;
+    return <><DemoIndicator enabled={isDemo} /><Results room={room} currentUser={currentUser} emit={emit} /></>;
   }
 
   if (mode === "roulette") {
-    return <RouletteGame room={room} currentUser={currentUser} emit={emit} spinResult={spinResult} />;
+    return <><DemoIndicator enabled={isDemo} /><RouletteGame room={room} currentUser={currentUser} emit={emit} spinResult={spinResult} /></>;
   }
   if (mode === "elimination" || mode === "eliminationbyturns") {
-    return <EliminationGame room={room} currentUser={currentUser} emit={emit} />;
+    return <><DemoIndicator enabled={isDemo} /><EliminationGame room={room} currentUser={currentUser} emit={emit} /></>;
   }
   if (mode === "consensus") {
-    return <ConsensusGame room={room} currentUser={currentUser} emit={emit} />;
+    return <><DemoIndicator enabled={isDemo} /><ConsensusGame room={room} currentUser={currentUser} emit={emit} /></>;
   }
 
-  return <Lobby room={room} currentUser={currentUser} emit={emit} notice={notice} clearNotice={clearNotice} setNotice={state.setNotice} />;
+  return <Lobby room={room} currentUser={currentUser} isDemo={isDemo} emit={emit} notice={notice} clearNotice={clearNotice} setNotice={state.setNotice} />;
 }

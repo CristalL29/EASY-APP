@@ -6,11 +6,12 @@ Aplicación de decisiones grupales en tiempo real hecha con Vite, React, Tailwin
 
 ```bash
 npm install
-Copy-Item .env.example .env
 npm run dev
 ```
 
-Configura `VITE_SOCKET_URL` en `.env` con la URL del servidor Socket.IO. Si se omite, el cliente conecta al mismo origen que la aplicación.
+La app usa datos ficticios en modo demo por defecto y no necesita un servidor para probar salas y juegos. Los cambios solo viven en la sesión actual.
+
+Para conectar un servidor Socket.IO real, crea `.env` a partir de `.env.example`, cambia `VITE_USE_MOCK_DATA` a `false` y configura `VITE_SOCKET_URL` con la URL del servidor. Si se omite, el cliente conecta al mismo origen que la aplicación.
 
 ## Contrato del servidor
 
